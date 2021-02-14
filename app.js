@@ -3,6 +3,7 @@ const express = require('express')
 const handlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
 const app = express()
+const admin = require("./routes/admin")
 //const mongoose = require('mongoose')
 
 //Configurações
@@ -17,6 +18,15 @@ const app = express()
     //
 
 //Rotas
+    app.get('/', (req, res) => {
+        res.send("Rota principal")
+    })
+
+    app.get('/posts', (req, res) => {
+        res.send("Lista de Posts")
+    })
+
+    app.use('/admin', admin)
 
 //Outros
 const PORT = 8081
