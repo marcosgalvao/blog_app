@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const admin = require("./routes/admin")
 const path = require('path')
-//const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
 //Configurações
     //Body Parser
@@ -14,8 +14,18 @@ const path = require('path')
     //Handlebars
         app.engine('handlebars', handlebars({defaultLayout: 'main'}))
         app.set('view engine', 'handlebars');
+
     //Mongoose
-        //Em breve
+        mongoose.Promisse = global.Promise
+        mongoose.connect("mongodb://localhost/blog_appp", {
+            useNewUrlParser: true,
+            useUnifiedTopology: true 
+        }).then(() => {
+            console.log("Conectado ao mongodb.")
+        }).catch((err) => {
+            console.log("Erro ao conectar no mongodb " + err)
+        })
+
     //Public
         app.use(express.static(path.join(__dirname, "public")))
 
