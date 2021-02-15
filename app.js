@@ -50,13 +50,13 @@ const Postagem = mongoose.model('postagens')
         app.use(express.static(path.join(__dirname, "public")))
 
         app.use((req, res, next) => {
-            console.log('Oi, eu sou um middleware')
+          //  console.log('Oi, eu sou um middleware')
             next()
         })
 
 //Rotas
     app.get('/', (req, res) => {
-        Postagem.find().lean().populate('categoria').sort({data: 'desc'}).then((postagens) => {
+        Postagem.find().sort({data: 'desc'}).lean().populate('categoria').then((postagens) => {
 
             res.render('index', {postagens, postagens})
 
@@ -65,6 +65,21 @@ const Postagem = mongoose.model('postagens')
             res.redirect('/404')
         })
         
+    })
+
+    app.get('/postagem/:slug', (req, res) => {
+        
+        Postagem.findOne({slug: req.params.slug}).lean().then((postagem) => {
+            if (postagem) {
+                res.render('postagem/index', {postagem: postagem})
+            } else {
+                req.flash('error_msg', 'Esta postagem não existe')
+                res.redirect('/')
+            }
+        }).catch((err) => {
+            req.flash('error', 'Houve um erro interno')
+            res.redirect('/')
+        })
     })
 
     app.get('/404', (req, res) => {
