@@ -55,6 +55,7 @@ const db = require('./config/db')
             console.log("Conectado ao mongodb.")
         }).catch((err) => {
             console.log("Erro ao conectar no mongodb " + err)
+            req.flash('error_msg', 'Houve um erro interno. ' + err)
         })
 
     //Public
