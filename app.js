@@ -74,7 +74,7 @@ const db = require('./config/db')
 
         }).catch((err) => {
             req.flash('error_msg', 'Houve um erro interno.')
-            res.redirect('/404')
+          //  res.redirect('/404')
         })
         
     })
