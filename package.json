@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/marcosgalvao/blog_app/issues"
   },
-  "homepage": "https://github.com/marcosgalvao/blog_app#readme"
+  "homepage": "https://github.com/marcosgalvao/blog_app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
